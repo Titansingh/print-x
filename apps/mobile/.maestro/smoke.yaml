@@ -1,0 +1,8 @@
+# Device E2E smoke flow (Maestro). Requires a development build of the app
+# installed on a simulator/emulator/device: `maestro test apps/mobile/.maestro`.
+appId: com.example.printx
+---
+- launchApp
+- assertVisible: "Gifts made for them"
+- tapOn: "Your orders"
+- assertVisible: "Sign in to see your orders"

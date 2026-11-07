@@ -1,0 +1,17 @@
+{
+  // Expo's base config (bundler resolution, react-native conditions) plus the
+  // repository's strictness settings. Not extending tsconfig.base.json because
+  // Expo's module/lib requirements differ from the Vite and library presets.
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "types": ["jest"]
+  },
+  "include": ["app", "src"]
+}

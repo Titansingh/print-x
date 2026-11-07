@@ -1,0 +1,15 @@
+node_modules
+dist
+build
+coverage
+.turbo
+.expo
+.tmp-setup
+playwright-report
+test-results
+pnpm-lock.yaml
+apps/mobile/ios
+apps/mobile/android
+packages/api-types/src/generated
+# Original setup specification, kept verbatim.
+3d-printing-platform-kiro-setup.md

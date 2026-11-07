@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "Print x",
+    "slug": "print-x",
+    "scheme": "printx",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.example.printx"
+    },
+    "android": {
+      "package": "com.example.printx",
+      "edgeToEdgeEnabled": true
+    },
+    "plugins": ["expo-router", "expo-secure-store"]
+  }
+}

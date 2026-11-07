@@ -1,0 +1,32 @@
+{
+  "name": "@platform/3d-viewer-native",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Native 3D viewer boundary. Currently a documented interface and placeholder; no native renderer is selected yet.",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "clean": "node ../../scripts/clean.mjs .turbo"
+  },
+  "dependencies": {
+    "@platform/domain": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.3.0",
+    "tamagui": "3.2.3"
+  },
+  "devDependencies": {
+    "@platform/eslint-config": "workspace:*",
+    "@platform/tsconfig": "workspace:*",
+    "@types/react": "catalog:",
+    "eslint": "catalog:",
+    "react": "catalog:",
+    "tamagui": "catalog:",
+    "typescript": "catalog:"
+  }
+}

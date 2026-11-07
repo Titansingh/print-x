@@ -1,0 +1,23 @@
+{
+  "name": "@platform/api-types",
+  "version": "0.0.0",
+  "private": true,
+  "description": "TypeScript types generated from the backend-owned OpenAPI document. Do not edit generated files by hand.",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "generate": "node ../../scripts/generate-api-types.mjs",
+    "clean": "node ../../scripts/clean.mjs .turbo"
+  },
+  "devDependencies": {
+    "@platform/eslint-config": "workspace:*",
+    "@platform/tsconfig": "workspace:*",
+    "eslint": "catalog:",
+    "typescript": "catalog:"
+  }
+}

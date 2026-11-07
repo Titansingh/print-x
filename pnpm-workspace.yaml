@@ -1,0 +1,68 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+  - "tooling/*"
+
+# Resolve every unscoped and scoped package from the public npm registry,
+# independent of any user-level registry configuration.
+registries:
+  https://registry.npmjs.org/:
+    scopes: ["@"]
+
+# Expo / Metro expects a flat, hoisted node_modules layout in monorepos.
+nodeLinker: hoisted
+saveExact: true
+autoInstallPeers: true
+
+# Shared, exact dependency versions for non-Expo packages.
+# Expo-managed packages in apps/mobile are installed with `npx expo install`
+# and keep the Expo SDK-compatible ranges Expo writes.
+catalog:
+  "@eslint/js": 10.0.1
+  "@mantine/core": 9.7.5
+  "@mantine/hooks": 9.7.5
+  "@playwright/test": 1.65.0
+  "@react-three/drei": 10.7.9
+  "@react-three/fiber": 9.8.2
+  "@tamagui/config": 3.2.3
+  "@tamagui/vite-plugin": 3.2.3
+  "@tanstack/react-query": 5.107.1
+  "@testing-library/jest-dom": 7.0.1
+  "@testing-library/react": 16.3.3
+  "@types/node": 24.19.2
+  "@types/react": 19.3.0
+  "@types/react-dom": 19.3.0
+  "@types/three": 0.187.0
+  "@vitejs/plugin-react": 6.2.1
+  axios: 1.21.0
+  eslint: 10.14.0
+  eslint-config-prettier: 10.1.8
+  eslint-plugin-react-hooks: 7.1.1
+  eslint-plugin-react-refresh: 0.5.7
+  globals: 17.14.0
+  jsdom: 31.0.0
+  openapi-typescript: 7.13.0
+  react: 19.3.0
+  react-dom: 19.3.0
+  react-router: 8.5.1
+  tamagui: 3.2.3
+  three: 0.187.0
+  # 6.0.x: expected by Expo SDK 58; within typescript-eslint's supported range.
+  typescript: 6.0.3
+  typescript-eslint: 8.72.1
+  vite: 8.3.6
+  vitest: 5.1.0
+  zod: 4.6.7
+  zustand: 5.1.0
+# Dependencies allowed to run install scripts (everything else is blocked).
+allowBuilds:
+  esbuild: true
+  # Ships prebuilt binaries as optional dependencies; its script is a source-build fallback.
+  "@parcel/watcher": false
+
+# pnpm enforces a minimum release age by default. These very recent releases
+# were explicitly accepted during setup; remove entries once they age out.
+minimumReleaseAgeExclude:
+  - "@tanstack/query-core@5.107.1"
+  - "@tanstack/react-query@5.107.1"
+  - zustand@5.1.0

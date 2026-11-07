@@ -1,0 +1,27 @@
+{
+  "name": "@platform/auth-native",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Native auth adapter backed by secure platform storage (Expo SecureStore is injected by the app).",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "node ../../scripts/clean.mjs .turbo"
+  },
+  "dependencies": {
+    "@platform/auth-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@platform/eslint-config": "workspace:*",
+    "@platform/tsconfig": "workspace:*",
+    "eslint": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

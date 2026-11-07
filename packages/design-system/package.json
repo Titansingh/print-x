@@ -1,0 +1,35 @@
+{
+  "name": "@platform/design-system",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shared design tokens, semantic themes and the Tamagui config for customer apps.",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./tokens": "./src/tokens/index.ts",
+    "./tamagui.config": "./src/tamagui.config.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "node ../../scripts/clean.mjs .turbo"
+  },
+  "dependencies": {
+    "@tamagui/config": "catalog:"
+  },
+  "peerDependencies": {
+    "tamagui": "3.2.3"
+  },
+  "devDependencies": {
+    "@platform/eslint-config": "workspace:*",
+    "@platform/tsconfig": "workspace:*",
+    "@types/react": "catalog:",
+    "eslint": "catalog:",
+    "react": "catalog:",
+    "tamagui": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

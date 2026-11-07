@@ -1,0 +1,7 @@
+{
+  "extends": "../../tooling/typescript/vite-app.json",
+  "compilerOptions": {
+    "types": ["vite/client", "node", "@testing-library/jest-dom/vitest"]
+  },
+  "include": ["src", "e2e", "*.config.ts"]
+}

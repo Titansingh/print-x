@@ -1,0 +1,28 @@
+{
+  "name": "@platform/api-client",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Platform-neutral, OpenAPI-typed REST client factory built on axios. Apps inject base URL and auth.",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "node ../../scripts/clean.mjs .turbo"
+  },
+  "dependencies": {
+    "@platform/api-types": "workspace:*",
+    "axios": "catalog:"
+  },
+  "devDependencies": {
+    "@platform/eslint-config": "workspace:*",
+    "@platform/tsconfig": "workspace:*",
+    "eslint": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

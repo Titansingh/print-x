@@ -1,0 +1,51 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+web-build/
+*.tsbuildinfo
+
+# Turborepo
+.turbo/
+
+# Expo / React Native
+.expo/
+.expo-shared/
+expo-env.d.ts
+apps/mobile/ios/
+apps/mobile/android/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.keystore
+
+# Testing
+coverage/
+playwright-report/
+test-results/
+blob-report/
+
+# Environment (only .env.example files are committed)
+.env
+.env.*
+!.env.example
+
+# Downloaded OpenAPI specs (generated types are committed instead)
+openapi.local.*
+
+# Logs and OS files
+*.log
+npm-debug.log*
+pnpm-debug.log*
+.DS_Store
+
+# Editors
+.idea/
+*.swp
+
+# Local scratch
+.tmp-setup/

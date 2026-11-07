@@ -1,0 +1,32 @@
+{
+  "name": "3d-printing-platform",
+  "private": true,
+  "description": "Frontend monorepo for the city-first gifts and on-demand 3D printing marketplace.",
+  "packageManager": "pnpm@12.18.0",
+  "engines": {
+    "node": "^22.13.0 || ^24.3.0"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "turbo run dev --filter=@platform/storefront --filter=@platform/admin --filter=@platform/mobile",
+    "dev:storefront": "turbo run dev --filter=@platform/storefront",
+    "dev:admin": "turbo run dev --filter=@platform/admin",
+    "dev:mobile": "turbo run dev --filter=@platform/mobile",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "test:e2e": "turbo run test:e2e",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "clean": "turbo run clean && node scripts/clean.mjs .turbo",
+    "generate:api": "node scripts/generate-api-types.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "openapi-typescript": "catalog:",
+    "prettier": "3.9.10",
+    "turbo": "2.11.10",
+    "typescript": "catalog:"
+  }
+}
