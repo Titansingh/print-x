@@ -3,6 +3,7 @@ dist
 build
 coverage
 .turbo
+.tamagui
 .expo
 .tmp-setup
 playwright-report

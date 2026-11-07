@@ -10,6 +10,9 @@ web-build/
 # Turborepo
 .turbo/
 
+# Tamagui Vite plugin generated cache
+.tamagui/
+
 # Expo / React Native
 .expo/
 .expo-shared/
