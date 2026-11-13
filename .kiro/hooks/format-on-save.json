@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Prettier check on save",
+      "trigger": "PostFileSave",
+      "matcher": "\\.(ts|tsx|js|mjs|json|md|yml|yaml)$",
+      "description": "CI fails on `pnpm format:check`. Checking the saved file with Prettier catches formatting drift immediately and cheaply, unlike a full lint or typecheck.",
+      "action": {
+        "type": "agent",
+        "prompt": "A file was saved. Run `pnpm exec prettier --check <saved file path>` from the repo root. If it fails, run `pnpm exec prettier --write <saved file path>` and mention it in one line. Do nothing else."
+      },
+      "enabled": false
+    }
+  ]
+}

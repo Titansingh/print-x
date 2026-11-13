@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Keep env docs in sync",
+      "trigger": "PostFileSave",
+      "matcher": "apps/[^/]+/\\.env\\.example$",
+      "description": "Each app's env vars are validated in its config file and documented in docs/integration/environment.md. Changing .env.example without updating both leaves them out of sync.",
+      "action": {
+        "type": "agent",
+        "prompt": "An apps/*/.env.example file was saved. Compare its variables with the Zod schema in that app's src/app/config.ts (storefront, admin) or the reads in src/services/config.ts (mobile), and with docs/integration/environment.md. Update the docs or report mismatches. Variables prefixed VITE_ or EXPO_PUBLIC_ are public: warn if any looks like a secret, and never write real secret values anywhere."
+      },
+      "enabled": true
+    }
+  ]
+}

@@ -3,7 +3,7 @@
 ## Scope
 
 This repository is the **frontend monorepo** for the marketplace. It contains
-three applications and the shared packages they use. The backend lives in a
+three applications today (five fronts are targeted, see below) and the shared packages they use. The backend lives in a
 separate repository; its technology is undecided and this repo does not
 depend on it beyond a published OpenAPI document.
 
@@ -27,6 +27,29 @@ depend on it beyond a published OpenAPI document.
 | `apps/storefront` | Customer web                   | React + Vite, Tamagui via `@platform/ui`, React Router, lazy-loaded R3F viewer         |
 | `apps/mobile`     | Customer iOS/Android           | Expo SDK 58 + Expo Router, Tamagui via `@platform/ui`, SecureStore-backed auth adapter |
 | `apps/admin`      | Platform operations + partners | React + Vite, Mantine, permission-aware navigation and route guards                    |
+
+### Target: five fronts
+
+The product will have five fronts. Three exist today; two are planned.
+
+| #   | Front             | Platform    | Users          | Status                                                                           |
+| --- | ----------------- | ----------- | -------------- | -------------------------------------------------------------------------------- |
+| 1   | Customer web      | Web         | Customers      | `apps/storefront`                                                                |
+| 2   | Admin web         | Web         | Platform staff | `apps/admin`                                                                     |
+| 3   | Print partner web | Web         | Print partners | Planned. Partners use `apps/admin` today (`partner_admin`/`partner_staff` roles) |
+| 4   | Customer app      | iOS/Android | Customers      | `apps/mobile`                                                                    |
+| 5   | Print partner app | iOS/Android | Print partners | Planned. A flavour of `apps/mobile` (same Expo project)                          |
+
+Decisions and open points:
+
+- The customer app and the partner app are **flavours of one Expo project**
+  (separate app ID, name, icon and feature set per flavour, for example via an
+  `APP_VARIANT` variable and separate EAS build profiles). Not yet implemented.
+- Open: partner web is either a separate app or a partner-scoped view of the
+  admin shell. Not decided.
+- Mantine cannot run in React Native (it depends on the DOM and CSS). The
+  partner app therefore uses Tamagui, and partner web may use Mantine. Both
+  read the same design tokens. See [ui-system.md](./ui-system.md).
 
 Both customer apps target **feature parity**. Apps are organized **by
 feature** (`src/features/<area>`), with `services/` holding integration

@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Smart Commit",
+      "trigger": "UserPromptSubmit",
+      "matcher": "^/commit\\b",
+      "description": "On /commit, inspect staged changes and propose a Conventional Commits message, then ask for confirmation before committing.",
+      "action": {
+        "type": "agent",
+        "prompt": "The user typed /commit. 1) Run `git diff --staged` (and `git status --short`). If nothing is staged, say so and stop; do not stage files yourself. 2) Check whether the staged diff changes a version field: `expo.version` in apps/mobile/app.json, or `\"version\"` in any package.json. If it does, propose a build commit: single platform/app `build(<app>): <version>`; several apps `chore(build): <app> <version>; <app> <version>`. Native build numbers are not stored in this repo (eas.json uses remote versioning), so do not invent them. Ask 'Are you releasing this to the store?' and append ' [release]' if yes. 3) Otherwise propose `<type>(<scope>): <description>` with type in feat, fix, refactor, chore, docs, style, test, perf, ci, revert; scope is the app or package touched (storefront, admin, mobile, api-client, ui, design-system, auth, domain, utils, tooling, ci, deps), omitted when changes are cross-cutting. Imperative, lowercase description, no trailing period, under 72 characters. 4) Flag staged files that may contain secrets (.env, keys, credentials). 5) Show the proposed message and ask for confirmation. Only after the user confirms run `git commit -m \"<message>\"`. Never push, amend, or skip hooks."
+      },
+      "enabled": false
+    }
+  ]
+}

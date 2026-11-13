@@ -11,6 +11,41 @@
 Do not add NativeWind, React Native Paper or another competing mobile
 component library. The admin does not use Tamagui components.
 
+Planned fronts (see [overview.md](./overview.md)): print partner web (Mantine
+if it shares the admin shell; undecided) and the print partner app (a flavour
+of `apps/mobile`, so **Tamagui**). Mantine cannot be used in React Native: it
+renders DOM elements and uses CSS.
+
+## Custom design language (planned)
+
+A designer will deliver a custom design language. We implement it as our own
+components and wrappers, driven by one source of truth: the design tokens.
+
+1. **Tokens first.** The designer's colors, typography, spacing, radius,
+   shadows and motion go into `@platform/design-system/tokens`. The Tamagui
+   config and the Mantine theme are both derived from them, so one token change
+   updates every front.
+2. **Wrapper components.** Feature code imports our components, never the
+   underlying library.
+   - `@platform/ui` (Tamagui): customer web, customer app, partner app.
+   - Mantine wrapper package (planned, name not decided, for example
+     `@platform/ui-web-admin`): admin web and partner web.
+   - Both implementations follow one shared props contract (`variant`, `size`,
+     `disabled`, `loading`, ...), defined once, so a designer spec maps to one
+     API.
+3. **Enforcement (planned).** Feature code does not import `tamagui` or
+   `@mantine/*` directly; only the wrapper packages do. Use an ESLint
+   `no-restricted-imports` rule.
+4. **Accessibility lives in the wrappers** (focus ring, 44pt touch target,
+   labels, status not by color alone).
+5. **Platform-specific patterns.** Dense data tables and hover states have no
+   mobile equivalent; ask the designer for separate web and mobile variants.
+
+Core set to build first: Button, TextField, Select, Checkbox, Card, Badge,
+Modal, Table/List, Toast, Tabs.
+
+Until the designer's spec arrives, the current tokens stay provisional.
+
 ## Design tokens (`@platform/design-system`)
 
 All visual values are centralized and provisional (violet primary, neutral

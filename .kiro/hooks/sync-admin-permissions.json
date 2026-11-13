@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Sync admin nav with permissions",
+      "trigger": "PostFileSave",
+      "matcher": "packages/auth-core/src/(permissions|roles)\\.ts$",
+      "description": "Admin navigation (navItems) references Permission names from auth-core. When permissions or roles change, check that nav access rules and the demo session still match.",
+      "action": {
+        "type": "agent",
+        "prompt": "A permissions or roles file in packages/auth-core was saved. Compare it with `navItems` in apps/admin/src/app/permissions/navigation.ts and with packages/auth-core/src/demo/index.ts and auth-core.test.ts. Report any renamed or removed permission still referenced, or new permission that needs a nav entry. Fix only trivial mismatches in those files; otherwise list them. Remind that permissions are provisional until the backend issues its own, and that frontend checks are UX only. Do not modify other application code."
+      },
+      "enabled": true
+    }
+  ]
+}
