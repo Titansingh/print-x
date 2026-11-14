@@ -1,5 +1,13 @@
-import { roleConcepts, type RoleId } from "@platform/auth-core";
+import type { RoleId } from "@platform/auth-core";
 import { z } from "zod";
+
+/** Platform staff roles. Partner roles use apps/partner. */
+const staffRoles = [
+  "super_admin",
+  "platform_admin",
+  "operations_manager",
+  "operations_staff",
+] as const satisfies readonly RoleId[];
 
 /** The only place the admin reads build-time environment variables. */
 const envSchema = z.object({
@@ -8,7 +16,7 @@ const envSchema = z.object({
     .enum(["true", "false"])
     .default("false")
     .transform((value) => value === "true"),
-  VITE_DEMO_ROLE: z.enum(Object.keys(roleConcepts) as [RoleId, ...RoleId[]]).default("super_admin"),
+  VITE_DEMO_ROLE: z.enum(staffRoles).default("super_admin"),
 });
 
 const env = envSchema.parse(import.meta.env);

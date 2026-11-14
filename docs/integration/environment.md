@@ -5,15 +5,19 @@ local development. Real `.env` files are never committed.
 
 ## Variables
 
-| App        | Variable                         | Purpose                                                                                                                 | Default                                |
-| ---------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| storefront | `VITE_API_URL`                   | Backend REST base URL                                                                                                   | `http://localhost:8080`                |
-| storefront | `VITE_USE_DEMO_DATA`             | Dev-only isolated demo catalog                                                                                          | `false` (ignored in production builds) |
-| admin      | `VITE_API_URL`                   | Backend REST base URL                                                                                                   | `http://localhost:8080`                |
-| admin      | `VITE_USE_DEMO_AUTH`             | Dev-only fake session to explore the admin shell                                                                        | `false` (ignored in production builds) |
-| admin      | `VITE_DEMO_ROLE`                 | Demo role (`super_admin`, `platform_admin`, `operations_manager`, `operations_staff`, `partner_admin`, `partner_staff`) | `super_admin`                          |
-| mobile     | `EXPO_PUBLIC_API_URL`            | Backend REST base URL                                                                                                   | `http://localhost:8080`                |
-| scripts    | `API_SPEC_URL` / `API_SPEC_PATH` | OpenAPI source for `pnpm generate:api`                                                                                  | none                                   |
+| App        | Variable                         | Purpose                                                                                      | Default                                |
+| ---------- | -------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------- |
+| storefront | `VITE_API_URL`                   | Backend REST base URL                                                                        | `http://localhost:8080`                |
+| storefront | `VITE_USE_DEMO_DATA`             | Dev-only isolated demo catalog                                                               | `false` (ignored in production builds) |
+| admin      | `VITE_API_URL`                   | Backend REST base URL                                                                        | `http://localhost:8080`                |
+| admin      | `VITE_USE_DEMO_AUTH`             | Dev-only fake session to explore the admin shell                                             | `false` (ignored in production builds) |
+| admin      | `VITE_DEMO_ROLE`                 | Demo role (`super_admin`, `platform_admin`, `operations_manager`, `operations_staff`)        | `super_admin`                          |
+| partner    | `VITE_API_URL`                   | Backend REST base URL                                                                        | `http://localhost:8080`                |
+| partner    | `VITE_USE_DEMO_AUTH`             | Dev-only fake session to explore the partner shell                                           | `false` (ignored in production builds) |
+| partner    | `VITE_DEMO_ROLE`                 | Demo role (`partner_admin`, `partner_staff`)                                                 | `partner_admin`                        |
+| mobile     | `EXPO_PUBLIC_APP_VARIANT`        | App flavour (`customer`, `partner`); set `APP_VARIANT` to the same value for `app.config.ts` | `customer`                             |
+| mobile     | `EXPO_PUBLIC_API_URL`            | Backend REST base URL                                                                        | `http://localhost:8080`                |
+| scripts    | `API_SPEC_URL` / `API_SPEC_PATH` | OpenAPI source for `pnpm generate:api`                                                       | none                                   |
 
 Env vars are read in exactly one place per app (`src/app/config.ts` for the
 web apps, validated with Zod; `src/services/config.ts` on mobile) and passed

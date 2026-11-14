@@ -1,9 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
-import { DataTable, type DataTableColumn } from "../../components/DataTable";
-import { FilterBar } from "../../components/FilterBar";
-import { PageLayout } from "../../layouts/PageLayout";
+import { DataTable, FilterBar, PageLayout, type DataTableColumn } from "@platform/ui-admin";
 
 /** Frontend row view model; map from generated API types once available. */
 interface OrderRow {

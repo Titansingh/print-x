@@ -3,7 +3,7 @@
 ## Scope
 
 This repository is the **frontend monorepo** for the marketplace. It contains
-three applications today (five fronts are targeted, see below) and the shared packages they use. The backend lives in a
+four applications (five fronts; the mobile app has two flavours, see below) and the shared packages they use. The backend lives in a
 separate repository; its technology is undecided and this repo does not
 depend on it beyond a published OpenAPI document.
 
@@ -22,33 +22,37 @@ depend on it beyond a published OpenAPI document.
 
 ## Applications
 
-| App               | Purpose                        | Key choices                                                                            |
-| ----------------- | ------------------------------ | -------------------------------------------------------------------------------------- |
-| `apps/storefront` | Customer web                   | React + Vite, Tamagui via `@platform/ui`, React Router, lazy-loaded R3F viewer         |
-| `apps/mobile`     | Customer iOS/Android           | Expo SDK 58 + Expo Router, Tamagui via `@platform/ui`, SecureStore-backed auth adapter |
-| `apps/admin`      | Platform operations + partners | React + Vite, Mantine, permission-aware navigation and route guards                    |
+| App               | Purpose              | Key choices                                                                            |
+| ----------------- | -------------------- | -------------------------------------------------------------------------------------- |
+| `apps/storefront` | Customer web         | React + Vite, Tamagui via `@platform/ui`, React Router, lazy-loaded R3F viewer         |
+| `apps/mobile`     | Customer iOS/Android | Expo SDK 58 + Expo Router, Tamagui via `@platform/ui`, SecureStore-backed auth adapter |
+| `apps/admin`      | Platform operations  | React + Vite, Mantine, permission-aware navigation and route guards                    |
 
 ### Target: five fronts
 
 The product will have five fronts. Three exist today; two are planned.
 
-| #   | Front             | Platform    | Users          | Status                                                                           |
-| --- | ----------------- | ----------- | -------------- | -------------------------------------------------------------------------------- |
-| 1   | Customer web      | Web         | Customers      | `apps/storefront`                                                                |
-| 2   | Admin web         | Web         | Platform staff | `apps/admin`                                                                     |
-| 3   | Print partner web | Web         | Print partners | Planned. Partners use `apps/admin` today (`partner_admin`/`partner_staff` roles) |
-| 4   | Customer app      | iOS/Android | Customers      | `apps/mobile`                                                                    |
-| 5   | Print partner app | iOS/Android | Print partners | Planned. A flavour of `apps/mobile` (same Expo project)                          |
+| #   | Front             | Platform    | Users          | Status                                                                                     |
+| --- | ----------------- | ----------- | -------------- | ------------------------------------------------------------------------------------------ |
+| 1   | Customer web      | Web         | Customers      | `apps/storefront`                                                                          |
+| 2   | Admin web         | Web         | Platform staff | `apps/admin`                                                                               |
+| 3   | Print partner web | Web         | Print partners | `apps/partner` (Mantine, scaffolded: dashboard, print jobs, printers placeholders)         |
+| 4   | Customer app      | iOS/Android | Customers      | `apps/mobile`                                                                              |
+| 5   | Print partner app | iOS/Android | Print partners | `apps/mobile` partner flavour (`APP_VARIANT=partner`); config only, no partner screens yet |
 
 Decisions and open points:
 
 - The customer app and the partner app are **flavours of one Expo project**
-  (separate app ID, name, icon and feature set per flavour, for example via an
-  `APP_VARIANT` variable and separate EAS build profiles). Not yet implemented.
-- Open: partner web is either a separate app or a partner-scoped view of the
-  admin shell. Not decided.
+  (separate app ID, name, scheme and feature set per flavour). `app.config.ts`
+  reads `APP_VARIANT`; EAS has `*-partner` profiles; the bundle reads
+  `EXPO_PUBLIC_APP_VARIANT` via `appConfig.variant`. Partner screens are not
+  built yet and the partner identifiers are placeholders.
+- Decided: partner web is a **separate app** (`apps/partner`) using
+  **Mantine**, with its own permission-aware navigation registry. The admin
+  is for platform staff only: partner-scoped sessions (`partnerId` set) see a
+  "use the partner portal" page there (UX only; the backend enforces access).
 - Mantine cannot run in React Native (it depends on the DOM and CSS). The
-  partner app therefore uses Tamagui, and partner web may use Mantine. Both
+  partner app therefore uses Tamagui, and partner web uses Mantine. Both
   read the same design tokens. See [ui-system.md](./ui-system.md).
 
 Both customer apps target **feature parity**. Apps are organized **by
@@ -74,12 +78,13 @@ entry declares the permissions it needs.
 | `@platform/auth-native`                         | Secure token store + token adapter (SecureStore injected by the app)                                                                | native                                    |
 | `@platform/3d-viewer-web`                       | Three.js + React Three Fiber GLB/GLTF viewer                                                                                        | web                                       |
 | `@platform/3d-viewer-native`                    | Native viewer contract + placeholder                                                                                                | native                                    |
+| `@platform/ui-admin`                            | Mantine theme, app shell, page layout, table, filter bar, states for admin and partner web                                          | web                                       |
 | `@platform/utils`                               | Money formatting, polling backoff, small helpers                                                                                    | all                                       |
 | `@platform/eslint-config`, `@platform/tsconfig` | Shared tooling configs                                                                                                              | tooling                                   |
 
-**Planned, not created:** `packages/ui-admin` (shared admin-only components).
-The admin's table/filter/state components live in `apps/admin/src/components`
-until a second admin consumer exists.
+`@platform/ui-admin` (`packages/ui-admin`) holds the Mantine theme, shell,
+layouts, table, filter and state components shared by `apps/admin` and
+`apps/partner`. It takes callbacks, never router objects.
 
 ### Dependency rules
 

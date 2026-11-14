@@ -23,16 +23,16 @@ expo ~58.0.23, react-native 0.88.1, expo-router ~58.0.30, expo-secure-store ~58.
 
 ## Commands (run from repo root)
 
-| Command                                                                    | Purpose                                                                                                |
-| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `pnpm install`                                                             | install (CI uses `--frozen-lockfile`)                                                                  |
-| `pnpm dev` / `dev:storefront` (:5173) / `dev:admin` (:5174) / `dev:mobile` | dev servers                                                                                            |
-| `pnpm build`                                                               | build web apps (`tsc --noEmit && vite build`)                                                          |
-| `pnpm lint` / `typecheck` / `test`                                         | via Turbo in every workspace                                                                           |
-| `pnpm test:e2e`                                                            | Playwright (builds first); once: `pnpm --filter @platform/storefront exec playwright install chromium` |
-| `pnpm format` / `format:check`                                             | Prettier                                                                                               |
-| `pnpm generate:api`                                                        | OpenAPI -> `packages/api-types/src/generated`                                                          |
-| `pnpm --filter <name> <script>`                                            | single workspace, e.g. `@platform/admin test`                                                          |
+| Command                                                                                            | Purpose                                                                                                |
+| -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `pnpm install`                                                                                     | install (CI uses `--frozen-lockfile`)                                                                  |
+| `pnpm dev` / `dev:storefront` (:5173) / `dev:admin` (:5174) / `dev:partner` (:5175) / `dev:mobile` | dev servers                                                                                            |
+| `pnpm build`                                                                                       | build web apps (`tsc --noEmit && vite build`)                                                          |
+| `pnpm lint` / `typecheck` / `test`                                                                 | via Turbo in every workspace                                                                           |
+| `pnpm test:e2e`                                                                                    | Playwright (builds first); once: `pnpm --filter @platform/storefront exec playwright install chromium` |
+| `pnpm format` / `format:check`                                                                     | Prettier                                                                                               |
+| `pnpm generate:api`                                                                                | OpenAPI -> `packages/api-types/src/generated`                                                          |
+| `pnpm --filter <name> <script>`                                                                    | single workspace, e.g. `@platform/admin test`                                                          |
 
 Full CI parity: `pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build`.
 
@@ -41,7 +41,7 @@ Full CI parity: `pnpm format:check && pnpm lint && pnpm typecheck && pnpm test &
 - Backend code, DB, ORM, migrations, or invented API endpoints/auth providers (backend is a separate repo).
 - `openapi-fetch` or `fetch` wrappers for API calls. The team chose axios via `@platform/api-client`.
 - NativeWind, React Native Paper or other mobile UI libraries. Tamagui only for customer apps.
-- Tamagui in the admin, or Mantine in storefront/mobile.
+- Tamagui in admin or partner web, or Mantine in storefront/mobile.
 - Tamagui `hoverStyle` / `$md` props. Tamagui 3 uses inline grammar (`px="4 md:8"`).
 - AsyncStorage for tokens (use Expo SecureStore) or browser storage for tokens.
 - Secrets in `VITE_*` / `EXPO_PUBLIC_*` variables (they ship in the bundle). Never commit `.env` files, only `.env.example`.

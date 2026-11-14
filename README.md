@@ -1,8 +1,9 @@
 # 3D Printing Marketplace: Frontend Monorepo
 
 Frontend for a city-first marketplace for gifts and on-demand 3D printing:
-customer web storefront, customer mobile app (iOS/Android) and one
-role/permission-aware admin for platform operations and print partners.
+customer web storefront, customer mobile app (iOS/Android, with a print
+partner flavour), a role/permission-aware admin for platform operations and a
+print partner web app.
 
 The **backend is a separate repository** (technology undecided). This repo
 contains no backend, database, ORM, migrations or secrets. It consumes the
@@ -35,6 +36,7 @@ pnpm install
 | ----------------- | ------------------------------------------------------ | ---------------------------- |
 | `apps/storefront` | React 19, Vite 8, Tamagui 3, React Router 8            | http://localhost:5173        |
 | `apps/admin`      | React 19, Vite 8, Mantine 9, React Router 8            | http://localhost:5174        |
+| `apps/partner`    | React 19, Vite 8, Mantine 9, React Router 8            | http://localhost:5175        |
 | `apps/mobile`     | Expo SDK 58, React Native 0.88, Expo Router, Tamagui 3 | Metro: http://localhost:8081 |
 
 Shared across apps: TanStack Query (server state), Zustand (global client
@@ -47,9 +49,10 @@ Run from the repository root.
 
 | Command                        | What it does                                                           |
 | ------------------------------ | ---------------------------------------------------------------------- |
-| `pnpm dev`                     | All app dev servers in parallel (storefront, admin, Expo)              |
+| `pnpm dev`                     | All app dev servers in parallel (storefront, admin, partner, Expo)     |
 | `pnpm dev:storefront`          | Storefront on :5173                                                    |
 | `pnpm dev:admin`               | Admin on :5174                                                         |
+| `pnpm dev:partner`             | Partner web on :5175                                                   |
 | `pnpm dev:mobile`              | Expo dev server (press `i` / `a` for simulators, scan QR for a device) |
 | `pnpm build`                   | Production builds of the web apps                                      |
 | `pnpm lint`                    | ESLint in every workspace                                              |
@@ -103,7 +106,7 @@ put secrets in them. Details:
 ## Repository layout
 
 ```text
-apps/          storefront (web), mobile (Expo), admin (web)
+apps/          storefront (web), mobile (Expo; customer + partner flavours), admin (web), partner (web)
 packages/      shared libraries (UI, design system, API client/types, auth, 3D viewers, domain, utils)
 tooling/       shared ESLint and TypeScript configs
 docs/          architecture and integration docs

@@ -19,10 +19,11 @@ const px = (value: number) => `${value}px`;
 const em = (value: number) => `${value / 16}em`;
 
 /**
- * Admin theme derived from the shared design tokens. Mantine-specific
- * component styling stays here; the customer apps never import Mantine.
+ * Mantine theme for the admin and partner web apps, derived from the shared
+ * design tokens. Mantine-specific component styling stays here; the customer
+ * apps never import Mantine.
  */
-export const adminTheme = createTheme({
+export const mantineTheme = createTheme({
   primaryColor: "brand",
   primaryShade: { light: 6, dark: 4 },
   colors: {

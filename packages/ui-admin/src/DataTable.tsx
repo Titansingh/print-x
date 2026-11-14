@@ -24,7 +24,7 @@ export interface DataTableProps<Row> {
 }
 
 /**
- * Table convention for admin list screens: one component handles loading,
+ * Table convention for admin and partner list screens: one component handles loading,
  * error and empty states so every queue/list behaves the same way.
  * Server-side pagination/sorting params should flow through TanStack Query keys.
  */

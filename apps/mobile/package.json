@@ -9,6 +9,7 @@
     "start": "expo start",
     "ios": "expo start --ios",
     "android": "expo start --android",
+    "dev:partner": "APP_VARIANT=partner EXPO_PUBLIC_APP_VARIANT=partner expo start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "jest --ci",

@@ -2,7 +2,7 @@ import { Button, Paper, Stack, Text, TextInput } from "@mantine/core";
 import { useState, type FormEvent } from "react";
 import { z } from "zod";
 
-import { PageLayout } from "../../layouts/PageLayout";
+import { PageLayout } from "@platform/ui-admin";
 
 /**
  * Form convention: a Zod schema for client-side validation, controlled

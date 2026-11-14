@@ -8,9 +8,10 @@
   },
   "type": "module",
   "scripts": {
-    "dev": "turbo run dev --filter=@platform/storefront --filter=@platform/admin --filter=@platform/mobile",
+    "dev": "turbo run dev --filter=@platform/storefront --filter=@platform/admin --filter=@platform/partner --filter=@platform/mobile",
     "dev:storefront": "turbo run dev --filter=@platform/storefront",
     "dev:admin": "turbo run dev --filter=@platform/admin",
+    "dev:partner": "turbo run dev --filter=@platform/partner",
     "dev:mobile": "turbo run dev --filter=@platform/mobile",
     "build": "turbo run build",
     "lint": "turbo run lint",

@@ -1,7 +1,7 @@
 import { Paper, SimpleGrid, Text } from "@mantine/core";
 
 import { useSession } from "../../app/permissions/useSession";
-import { PageLayout } from "../../layouts/PageLayout";
+import { PageLayout } from "@platform/ui-admin";
 
 const summaryCards = [
   { label: "Orders awaiting assignment" },

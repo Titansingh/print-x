@@ -43,16 +43,23 @@ describe("admin smoke", () => {
   });
 
   it("shows only navigation permitted by the session's permissions", () => {
-    signInAs("partner_staff");
+    signInAs("operations_staff");
     renderAt("/");
     const nav = screen.getByRole("navigation", { name: "Admin navigation" });
     expect(within(nav).getByRole("link", { name: "Print jobs" })).toBeInTheDocument();
     expect(within(nav).queryByRole("link", { name: "Users" })).not.toBeInTheDocument();
-    expect(within(nav).queryByRole("link", { name: "Orders" })).not.toBeInTheDocument();
+    expect(within(nav).queryByRole("link", { name: "Settings & roles" })).not.toBeInTheDocument();
+  });
+
+  it("sends partner-scoped sessions to the partner portal", () => {
+    signInAs("partner_admin");
+    renderAt("/printers");
+    expect(screen.getByRole("heading", { name: "Use the partner portal" })).toBeInTheDocument();
+    expect(screen.queryByRole("navigation", { name: "Admin navigation" })).not.toBeInTheDocument();
   });
 
   it("redirects to forbidden when a route's permission is missing", async () => {
-    signInAs("partner_staff");
+    signInAs("operations_staff");
     renderAt("/users");
     expect(
       await screen.findByRole("heading", { name: "You don't have access to this page" }),

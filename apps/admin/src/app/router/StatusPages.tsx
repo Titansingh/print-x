@@ -1,7 +1,6 @@
 import { Button, Center, Paper, Stack, Text, Title } from "@mantine/core";
+import { EmptyView } from "@platform/ui-admin";
 import { Link } from "react-router";
-
-import { EmptyView } from "../../components/DataStates";
 
 export function SignInPage() {
   return (
@@ -21,6 +20,28 @@ export function SignInPage() {
               <code>apps/admin/.env.local</code> and restart the dev server.
             </Text>
           ) : null}
+        </Stack>
+      </Paper>
+    </Center>
+  );
+}
+
+/** Shown to partner-scoped sessions: print partners use the partner web app. */
+export function PartnerPortalPage({ onSignOut }: { onSignOut: () => Promise<void> }) {
+  return (
+    <Center mih="100vh" p="md">
+      <Paper withBorder radius="md" p="xl" maw={440} w="100%">
+        <Stack gap="sm" align="flex-start">
+          <Title order={1} size="h2">
+            Use the partner portal
+          </Title>
+          <Text c="dimmed">
+            This admin is for platform staff. Print partners manage print jobs, printers and
+            materials in the partner portal.
+          </Text>
+          <Button variant="light" onClick={() => void onSignOut()}>
+            Sign out
+          </Button>
         </Stack>
       </Paper>
     </Center>

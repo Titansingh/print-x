@@ -24,7 +24,7 @@ export const navItems: readonly NavItem[] = [
     path: "/printers",
     label: "Printers & materials",
     group: "Partners",
-    access: { anyOf: ["printers.manage", "partners.manage"] },
+    access: { allOf: ["partners.manage"] },
   },
   {
     path: "/model-generation",

@@ -1,9 +1,9 @@
 import { Paper } from "@mantine/core";
 
-import { PageLayout } from "../layouts/PageLayout";
 import { EmptyView } from "./DataStates";
+import { PageLayout } from "./PageLayout";
 
-/** Representative placeholder for admin areas whose backend contract is pending. */
+/** Representative placeholder for areas whose backend contract is pending. */
 export function PlaceholderPage({ title, description }: { title: string; description: string }) {
   return (
     <PageLayout title={title} description={description}>

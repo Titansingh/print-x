@@ -12,7 +12,7 @@ Features live in `apps/<app>/src/features/<area>/`. Reference implementation: `a
    - `types.ts`: view model (name ends in `View`) and a `<Area>Source` interface. Use `Money` from `@platform/domain` for prices.
    - `src/services/<area>-source.ts`: the integration boundary. Implement with `apiClient` once types exist, mapping API types to view models. Dev-only demo data goes under `src/mocks`, loaded via `import.meta.env.DEV && appConfig.<flag>`.
    - `queries.ts`: a `<area>Keys` factory and `useQuery` hooks, as in `catalog/queries.ts`.
-   - `<Area>Page.tsx` (web) or `<Area>Screen.tsx` (mobile). Render pending, error and empty with `LoadingState`, `ErrorState`, `EmptyState` from `@platform/ui` (storefront/mobile). In admin, use `apps/admin/src/components/DataStates.tsx`, `DataTable.tsx` and `FilterBar.tsx` with Mantine.
+   - `<Area>Page.tsx` (web) or `<Area>Screen.tsx` (mobile). Render pending, error and empty with `LoadingState`, `ErrorState`, `EmptyState` from `@platform/ui` (storefront/mobile). In admin and partner web, use `LoadingView`/`EmptyView`/`ErrorView`, `DataTable` and `FilterBar` from `@platform/ui-admin`.
 3. Env vars are only read in the app's `config.ts`. New ones go in the Zod schema, the app's `.env.example`, and `docs/integration/environment.md`.
 4. Wire the route: storefront in `src/app/routes.tsx`; mobile by adding `app/<name>.tsx` and a `<Stack.Screen>` in `app/_layout.tsx`; admin via the `add-admin-page` skill.
 5. Keep customer web and mobile at feature parity where the feature exists on both.

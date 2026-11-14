@@ -9,7 +9,7 @@ export interface PageLayoutProps {
   children: ReactNode;
 }
 
-/** Reusable page header + content layout for every admin screen. */
+/** Reusable page header + content layout for every admin and partner screen. */
 export function PageLayout({ title, description, actions, children }: PageLayoutProps) {
   return (
     <Stack gap="lg">

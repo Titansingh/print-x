@@ -313,6 +313,9 @@ importers:
       '@platform/domain':
         specifier: workspace:*
         version: link:../../packages/domain
+      '@platform/ui-admin':
+        specifier: workspace:*
+        version: link:../../packages/ui-admin
       '@platform/utils':
         specifier: workspace:*
         version: link:../../packages/utils
@@ -486,6 +489,97 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
+
+  apps/partner:
+    dependencies:
+      '@mantine/core':
+        specifier: 'catalog:'
+        version: 9.7.5(@mantine/hooks@9.7.5(react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@mantine/hooks':
+        specifier: 'catalog:'
+        version: 9.7.5(react@19.3.0)
+      '@platform/api-client':
+        specifier: workspace:*
+        version: link:../../packages/api-client
+      '@platform/auth-core':
+        specifier: workspace:*
+        version: link:../../packages/auth-core
+      '@platform/auth-web':
+        specifier: workspace:*
+        version: link:../../packages/auth-web
+      '@platform/design-system':
+        specifier: workspace:*
+        version: link:../../packages/design-system
+      '@platform/domain':
+        specifier: workspace:*
+        version: link:../../packages/domain
+      '@platform/ui-admin':
+        specifier: workspace:*
+        version: link:../../packages/ui-admin
+      '@platform/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
+      '@tanstack/react-query':
+        specifier: 'catalog:'
+        version: 5.107.1(@types/react@19.3.0)(react@19.3.0)
+      react:
+        specifier: 'catalog:'
+        version: 19.3.0
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.3.0(react@19.3.0)
+      react-router:
+        specifier: 'catalog:'
+        version: 8.5.1(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      zod:
+        specifier: 'catalog:'
+        version: 4.6.7
+      zustand:
+        specifier: 'catalog:'
+        version: 5.1.0(@types/react@19.3.0)(react@19.3.0)(use-sync-external-store@1.7.0(react@19.3.0))
+    devDependencies:
+      '@platform/eslint-config':
+        specifier: workspace:*
+        version: link:../../tooling/eslint
+      '@platform/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      '@playwright/test':
+        specifier: 'catalog:'
+        version: 1.65.0
+      '@testing-library/jest-dom':
+        specifier: 'catalog:'
+        version: 7.0.1(@testing-library/dom@10.4.2)(vitest@5.1.0(@types/node@24.19.2)(jsdom@31.0.0)(vite@8.3.6(@types/node@24.19.2)(esbuild@0.28.1)(terser@5.51.2)))
+      '@testing-library/react':
+        specifier: 'catalog:'
+        version: 16.3.3(@testing-library/dom@10.4.2)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.19.2
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.3.0
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.3.0(@types/react@19.3.0)
+      '@vitejs/plugin-react':
+        specifier: 'catalog:'
+        version: 6.2.1(babel-plugin-react-compiler@1.0.0)(vite@8.3.6(@types/node@24.19.2)(esbuild@0.28.1)(terser@5.51.2))
+      eslint:
+        specifier: 'catalog:'
+        version: 10.14.0(supports-color@10.2.2)
+      jsdom:
+        specifier: 'catalog:'
+        version: 31.0.0
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
+      vite:
+        specifier: 'catalog:'
+        version: 8.3.6(@types/node@24.19.2)(esbuild@0.28.1)(terser@5.51.2)
+      vitest:
+        specifier: 'catalog:'
+        version: 5.1.0(@types/node@24.19.2)(jsdom@31.0.0)(vite@8.3.6(@types/node@24.19.2)(esbuild@0.28.1)(terser@5.51.2))
 
   apps/storefront:
     dependencies:
@@ -850,6 +944,37 @@ importers:
       tamagui:
         specifier: 'catalog:'
         version: 3.2.3(18ac50b23d579050d5198fb51ff4f024)
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
+
+  packages/ui-admin:
+    dependencies:
+      '@platform/design-system':
+        specifier: workspace:*
+        version: link:../design-system
+    devDependencies:
+      '@mantine/core':
+        specifier: 'catalog:'
+        version: 9.7.5(@mantine/hooks@9.7.5(react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@mantine/hooks':
+        specifier: 'catalog:'
+        version: 9.7.5(react@19.3.0)
+      '@platform/eslint-config':
+        specifier: workspace:*
+        version: link:../../tooling/eslint
+      '@platform/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.3.0
+      eslint:
+        specifier: 'catalog:'
+        version: 10.14.0(supports-color@10.2.2)
+      react:
+        specifier: 'catalog:'
+        version: 19.3.0
       typescript:
         specifier: 'catalog:'
         version: 6.0.3

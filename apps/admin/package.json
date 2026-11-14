@@ -22,6 +22,7 @@
     "@platform/auth-web": "workspace:*",
     "@platform/design-system": "workspace:*",
     "@platform/domain": "workspace:*",
+    "@platform/ui-admin": "workspace:*",
     "@platform/utils": "workspace:*",
     "@tanstack/react-query": "catalog:",
     "react": "catalog:",

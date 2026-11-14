@@ -1,8 +1,9 @@
 import type { AccessRequirement } from "@platform/auth-core";
+import { LoadingView } from "@platform/ui-admin";
 import { useEffect, type ReactNode } from "react";
 import { Navigate, useLocation } from "react-router";
 
-import { LoadingView } from "../../components/DataStates";
+import { PartnerPortalPage } from "../router/StatusPages";
 import { useCanAccess, useSession } from "./useSession";
 
 /**
@@ -11,7 +12,7 @@ import { useCanAccess, useSession } from "./useSession";
  * requests regardless of what the frontend renders.
  */
 export function RequireSession({ children }: { children: ReactNode }) {
-  const { status, refresh } = useSession();
+  const { status, session, refresh, signOut } = useSession();
   const location = useLocation();
 
   useEffect(() => {
@@ -23,6 +24,8 @@ export function RequireSession({ children }: { children: ReactNode }) {
   if (status !== "authenticated") {
     return <Navigate to="/sign-in" replace state={{ from: location.pathname }} />;
   }
+  // The admin is for platform staff. Partner-scoped sessions use apps/partner.
+  if (session?.partnerId !== undefined) return <PartnerPortalPage onSignOut={signOut} />;
   return children;
 }
 

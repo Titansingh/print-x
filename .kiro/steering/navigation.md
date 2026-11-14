@@ -1,11 +1,11 @@
 ---
 inclusion: fileMatch
-fileMatchPattern: "{apps/*/src/app/**/routes.tsx,apps/admin/src/app/permissions/**,apps/admin/src/app/router/**,apps/mobile/app/**}"
+fileMatchPattern: "{apps/*/src/app/**/routes.tsx,apps/admin/src/app/permissions/**,apps/admin/src/app/router/**,apps/partner/src/app/permissions/**,apps/partner/src/app/router/**,apps/mobile/app/**}"
 ---
 
 # Navigation
 
-Two routers: React Router 8 (storefront, admin) and Expo Router (mobile). Shared UI never receives router objects, only callbacks.
+Two routers: React Router 8 (storefront, admin, partner) and Expo Router (mobile). Shared UI never receives router objects, only callbacks.
 
 ## Storefront (`apps/storefront/src/app/routes.tsx`)
 
@@ -18,6 +18,10 @@ Add a screen: create `src/features/<area>/<X>Page.tsx`, import it in `routes.tsx
 Routes are generated from the `navItems` registry in `src/app/permissions/navigation.ts`. Each item has `path`, `label`, `group` and an optional `access: AccessRequirement` (`allOf` / `anyOf` of `Permission`). `RequireSession` wraps the layout, `RequireAccess` wraps each page, and fallbacks are `/sign-in`, `/forbidden` and `*`.
 
 Add a page: (1) add a `NavItem` with the needed permissions (permission names come from `@platform/auth-core`, `permissions.ts`), (2) add the element to `pageByPath` in `routes.tsx` under the same path. Nested routes use `<path>/*`. See the `add-admin-page` skill.
+
+## Partner web (`apps/partner/src/app/router/routes.tsx`)
+
+Same registry pattern as the admin, with its own `navItems` (groups `Overview | Production | Business`) and `PartnerLayout`. Add a page the same way: a `NavItem` plus a `pageByPath` entry.
 
 ## Mobile (`apps/mobile/app/`, Expo Router file-based)
 

@@ -1,4 +1,4 @@
-import { PlaceholderPage } from "../components/PlaceholderPage";
+import { PlaceholderPage } from "@platform/ui-admin";
 
 /*
  * Representative placeholder routes for admin feature areas. Each moves to
@@ -20,7 +20,7 @@ export const PartnersPage = () => (
 export const PrintersPage = () => (
   <PlaceholderPage
     title="Printers & materials"
-    description="Printer capabilities, materials and capacity."
+    description="Review partners' printer capabilities, materials and capacity."
   />
 );
 export const ModelGenerationPage = () => (

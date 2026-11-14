@@ -12,6 +12,7 @@ Frontend-only pnpm + Turborepo monorepo for a city-first gifts and on-demand 3D 
 apps/storefront   customer web   (React, Vite, Tamagui, React Router)
 apps/mobile       customer iOS/Android (Expo SDK 58, Expo Router, Tamagui)
 apps/admin        one role/permission-aware admin (React, Vite, Mantine, React Router)
+apps/partner      print partner web (React, Vite, Mantine, React Router)
 packages/         source-only shared libraries (exports point at src/*.ts, no build step)
 tooling/          @platform/eslint-config, @platform/tsconfig
 scripts/          generate-api-types.mjs, clean.mjs
@@ -20,7 +21,7 @@ docs/             architecture/ and integration/ docs
 
 ## Target: five fronts
 
-Existing: customer web (`apps/storefront`), admin web (`apps/admin`, also used by print partners via `partner_admin`/`partner_staff` roles today), customer app (`apps/mobile`). Planned: print partner web (separate app or partner-scoped admin shell, undecided) and print partner app (a flavour of `apps/mobile`, same Expo project, separate app ID and EAS profile). Do not build the planned fronts without the user confirming the open decisions.
+Existing: customer web (`apps/storefront`), admin web (`apps/admin`, also used by print partners via `partner_admin`/`partner_staff` roles today), customer app (`apps/mobile`). Print partner web: `apps/partner` (React, Vite, Mantine, own `navItems` registry; placeholder pages). Print partner app: partner flavour of `apps/mobile` (`APP_VARIANT=partner`, `app.config.ts`, `*-partner` EAS profiles, `appConfig.variant`); no partner screens yet, ask what they should contain before building them.
 
 ## Packages and responsibilities
 
@@ -35,6 +36,7 @@ Existing: customer web (`apps/storefront`), admin web (`apps/admin`, also used b
 | `@platform/auth-web`              | Cookie-session adapter                                                                                                    |
 | `@platform/auth-native`           | Secure token store + token adapter (SecureStore injected by the app)                                                      |
 | `@platform/3d-viewer-web/-native` | R3F GLB/GLTF viewer (web); contract + placeholder (native)                                                                |
+| `@platform/ui-admin`              | Mantine theme (`mantineTheme`), `AppShellLayout`, `PageLayout`, `DataTable`, `FilterBar`, states for admin + partner web  |
 | `@platform/utils`                 | `formatMoney`, `getBackoffDelay`, `assertNever`                                                                           |
 
 ## Dependency rules (from docs/architecture/overview.md)

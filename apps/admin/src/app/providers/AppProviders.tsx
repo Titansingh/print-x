@@ -5,7 +5,7 @@ import { QueryClientProvider, type QueryClient } from "@tanstack/react-query";
 import { useState, type ReactNode } from "react";
 
 import { createQueryClient } from "../../services/query-client";
-import { adminTheme, cssVariablesResolver } from "../theme";
+import { cssVariablesResolver, mantineTheme } from "@platform/ui-admin";
 
 export interface AppProvidersProps {
   children: ReactNode;
@@ -17,7 +17,7 @@ export function AppProviders({ children, queryClient }: AppProvidersProps) {
   return (
     <QueryClientProvider client={client}>
       <MantineProvider
-        theme={adminTheme}
+        theme={mantineTheme}
         cssVariablesResolver={cssVariablesResolver}
         defaultColorScheme="auto"
       >

@@ -2,17 +2,19 @@
 
 ## The split
 
-| Surface                          | Library     | Why                                                                |
-| -------------------------------- | ----------- | ------------------------------------------------------------------ |
-| Customer web (`apps/storefront`) | **Tamagui** | One component model for web and native; compiles to CSS on the web |
-| Customer mobile (`apps/mobile`)  | **Tamagui** | Same shared components as the web storefront                       |
-| Admin (`apps/admin`)             | **Mantine** | Data-heavy UI: tables, filters, forms, queues                      |
+| Surface                                      | Library     | Why                                                                |
+| -------------------------------------------- | ----------- | ------------------------------------------------------------------ |
+| Customer web (`apps/storefront`)             | **Tamagui** | One component model for web and native; compiles to CSS on the web |
+| Customer mobile (`apps/mobile`)              | **Tamagui** | Same shared components as the web storefront                       |
+| Admin (`apps/admin`)                         | **Mantine** | Data-heavy UI: tables, filters, forms, queues                      |
+| Partner web (`apps/partner`)                 | **Mantine** | Job queues, printers and materials; same patterns as the admin     |
+| Partner app (`apps/mobile`, partner flavour) | **Tamagui** | Same Expo project as the customer app                              |
 
 Do not add NativeWind, React Native Paper or another competing mobile
 component library. The admin does not use Tamagui components.
 
-Planned fronts (see [overview.md](./overview.md)): print partner web (Mantine
-if it shares the admin shell; undecided) and the print partner app (a flavour
+Planned fronts (see [overview.md](./overview.md)): print partner web (separate app
+`apps/partner`, Mantine) and the print partner app (a flavour
 of `apps/mobile`, so **Tamagui**). Mantine cannot be used in React Native: it
 renders DOM elements and uses CSS.
 
@@ -28,8 +30,10 @@ components and wrappers, driven by one source of truth: the design tokens.
 2. **Wrapper components.** Feature code imports our components, never the
    underlying library.
    - `@platform/ui` (Tamagui): customer web, customer app, partner app.
-   - Mantine wrapper package (planned, name not decided, for example
-     `@platform/ui-web-admin`): admin web and partner web.
+   - `@platform/ui-admin` (Mantine): admin web and partner web. Today it holds
+     the shared theme, `AppShellLayout`, `PageLayout`, `PlaceholderPage`,
+     `DataTable`, `FilterBar` and the Loading/Empty/Error views; design-language
+     components are added here when the designer's spec arrives.
    - Both implementations follow one shared props contract (`variant`, `size`,
      `disabled`, `loading`, ...), defined once, so a designer spec maps to one
      API.
@@ -78,7 +82,7 @@ modifiers inline, e.g. `borderColor="border-color hover:border-color-hover"`,
 `px="4 md:8"`, `outlineColor="focus-visible:focus-ring"`. There are no
 `hoverStyle` or `$md` props.
 
-### Mantine mapping (`apps/admin/src/app/theme.ts`)
+### Mantine mapping (`packages/ui-admin/src/theme.ts`, `mantineTheme`)
 
 - `brand`, `gray`, `green`, `yellow`, `red` and `dark` color tuples derive
   from the same palettes (Mantine uses 10 shades; the 950 step is dropped).

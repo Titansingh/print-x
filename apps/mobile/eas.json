@@ -7,13 +7,36 @@
     "development": {
       "developmentClient": true,
       "distribution": "internal",
-      "env": { "EXPO_PUBLIC_API_URL": "http://localhost:8080" }
+      "env": {
+        "EXPO_PUBLIC_API_URL": "http://localhost:8080"
+      }
     },
     "preview": {
       "distribution": "internal"
     },
     "production": {
       "autoIncrement": true
+    },
+    "development-partner": {
+      "extends": "development",
+      "env": {
+        "APP_VARIANT": "partner",
+        "EXPO_PUBLIC_APP_VARIANT": "partner"
+      }
+    },
+    "preview-partner": {
+      "extends": "preview",
+      "env": {
+        "APP_VARIANT": "partner",
+        "EXPO_PUBLIC_APP_VARIANT": "partner"
+      }
+    },
+    "production-partner": {
+      "extends": "production",
+      "env": {
+        "APP_VARIANT": "partner",
+        "EXPO_PUBLIC_APP_VARIANT": "partner"
+      }
     }
   },
   "submit": {
