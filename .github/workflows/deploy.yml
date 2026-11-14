@@ -1,0 +1,40 @@
+name: Deploy
+on:
+  push:
+    branches: [staging, main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref_name }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+    runs-on: [self-hosted, linux, x64, print-x]
+    timeout-minutes: 30
+    environment: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+    env:
+      DEPLOY_ENV: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+      COMPOSE_PROJECT_NAME: print-x-${{ github.ref_name == 'main' && 'production' || 'staging' }}
+      PORT_STOREFRONT: ${{ github.ref_name == 'main' && '9100' || '8100' }}
+      PORT_ADMIN: ${{ github.ref_name == 'main' && '9101' || '8101' }}
+      PORT_PARTNER: ${{ github.ref_name == 'main' && '9102' || '8102' }}
+      # Non-secret, public build values. Set per environment in GitHub Settings > Environments > Variables.
+      VITE_API_URL: ${{ vars.VITE_API_URL }}
+      VITE_USE_DEMO_DATA: ${{ vars.VITE_USE_DEMO_DATA || 'false' }}
+      VITE_USE_DEMO_AUTH: ${{ vars.VITE_USE_DEMO_AUTH || 'false' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Build images
+        run: docker compose -f deploy/docker-compose.yml build
+      - name: Start containers
+        run: docker compose -f deploy/docker-compose.yml up -d --remove-orphans
+      - name: Show status
+        run: docker compose -f deploy/docker-compose.yml ps
+      - name: Remove dangling images
+        run: docker image prune -f

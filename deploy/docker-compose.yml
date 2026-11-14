@@ -1,0 +1,47 @@
+# Variables come from the deploy workflow (see .github/workflows/deploy.yml).
+# Project name (-p print-x-staging | print-x-production) keeps environments separate.
+name: ${COMPOSE_PROJECT_NAME}
+
+x-build-args: &build-args
+  VITE_API_URL: ${VITE_API_URL:-}
+  VITE_USE_DEMO_DATA: ${VITE_USE_DEMO_DATA:-false}
+  VITE_USE_DEMO_AUTH: ${VITE_USE_DEMO_AUTH:-false}
+
+services:
+  storefront:
+    image: print-x-storefront:${DEPLOY_ENV}
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.web
+      args:
+        <<: *build-args
+        APP: storefront
+    restart: unless-stopped
+    ports:
+      - "${PORT_STOREFRONT}:80"
+
+  admin:
+    image: print-x-admin:${DEPLOY_ENV}
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.web
+      args:
+        <<: *build-args
+        APP: admin
+        VITE_DEMO_ROLE: ${VITE_DEMO_ROLE_ADMIN:-super_admin}
+    restart: unless-stopped
+    ports:
+      - "${PORT_ADMIN}:80"
+
+  partner:
+    image: print-x-partner:${DEPLOY_ENV}
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.web
+      args:
+        <<: *build-args
+        APP: partner
+        VITE_DEMO_ROLE: ${VITE_DEMO_ROLE_PARTNER:-partner_admin}
+    restart: unless-stopped
+    ports:
+      - "${PORT_PARTNER}:80"

@@ -1,0 +1,12 @@
+**/node_modules
+**/dist
+**/.turbo
+**/.expo
+**/.tamagui
+**/test-results
+.git
+.worktrees
+graphify-out
+**/.env
+**/.env.*
+!**/.env.example
